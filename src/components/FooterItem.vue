@@ -63,6 +63,10 @@ svg {
   list-style: none;
 }
 
+.link:hover {
+  color: #d87d4a;
+}
+
 .link {
   font-size: 13px;
   font-weight: bold;
@@ -71,6 +75,7 @@ svg {
   color: #ffffff;
   text-decoration: none;
   letter-spacing: 2px;
+  transition: 0.2s color;
 }
 
 .footer__description {
@@ -127,6 +132,30 @@ svg {
 
   svg {
     margin-left: 0;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .footer {
+    padding-left: 165px;
+    padding-right: 165px;
+    padding-bottom: 48px;
+    padding-top: 75px;
+    grid-template-areas: 'icon nav' 'text socials' 'copyright copyright';
+    gap: 36px;
+  }
+
+  .footer__description {
+    width: 540px;
+    margin-bottom: 20px;
+  }
+
+  .footer__link-list {
+    justify-content: flex-end;
+  }
+
+  .socials {
+    align-items: flex-end;
   }
 }
 </style>
