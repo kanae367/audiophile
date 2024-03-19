@@ -3,8 +3,7 @@ import AudiophileIcon from './icons/AudiophileIcon.vue'
 import facebook from './icons/facebook.svg'
 import twitter from './icons/twitter.svg'
 import instagram from './icons/instagram.svg'
-import { RouterLink } from 'vue-router'
-const pageLinks = ['home', 'headphones', 'speakers', 'earphones']
+import NavigationBar from './NavigationBar.vue'
 const socialLinks = [
   { name: 'Facebook', link: 'https://facebook.com', icon: facebook },
   { name: 'Twitter', link: 'https://twitter.com', icon: twitter },
@@ -20,11 +19,11 @@ const socialLinks = [
       lovers and sound specialists who are devoted to helping you get the most out of personal
       audio. Come and visit our demo facility - we’re open 7 days a week.
     </p>
-    <ul class="footer__link-list">
-      <li class="footer__link" v-for="item in pageLinks" :key="item">
-        <RouterLink :to="item" class="link">{{ item }}</RouterLink>
-      </li>
-    </ul>
+
+    <div class="footer__nav">
+      <NavigationBar />
+    </div>
+
     <ul class="socials">
       <li class="socials__icon" v-for="item in socialLinks" :key="item.name">
         <a :href="item.link" class="socials__icon-link"
@@ -32,7 +31,7 @@ const socialLinks = [
         /></a>
       </li>
     </ul>
-    <p class="footer__copyright">Copyright 2021. All Rights Reserved</p>
+    <p class="footer__copyright">Copyright 2024. All Rights Reserved</p>
   </footer>
 </template>
 
@@ -55,27 +54,8 @@ svg {
   margin: 0 auto;
 }
 
-.footer__link-list {
-  grid-area: nav;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  list-style: none;
-}
-
-.link:hover {
-  color: #d87d4a;
-}
-
-.link {
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 25px;
-  text-transform: uppercase;
-  color: #ffffff;
-  text-decoration: none;
-  letter-spacing: 2px;
-  transition: 0.2s color;
+.footer__nav {
+  grid: nav;
 }
 
 .footer__description {
@@ -116,11 +96,6 @@ svg {
     text-align: left;
   }
 
-  .footer__link-list {
-    flex-direction: row;
-    gap: 34px;
-  }
-
   .footer__description {
     margin-bottom: calc(80px - 32px);
   }
@@ -148,10 +123,6 @@ svg {
   .footer__description {
     width: 540px;
     margin-bottom: 20px;
-  }
-
-  .footer__link-list {
-    justify-content: flex-end;
   }
 
   .socials {
