@@ -3,7 +3,8 @@ import AudiophileIcon from './icons/AudiophileIcon.vue'
 import facebook from './icons/facebook.svg'
 import twitter from './icons/twitter.svg'
 import instagram from './icons/instagram.svg'
-const pageLinks = ['Home', 'Headphones', 'Speakers', 'Earphones']
+import { RouterLink } from 'vue-router'
+const pageLinks = ['home', 'headphones', 'speakers', 'earphones']
 const socialLinks = [
   { name: 'Facebook', link: 'https://facebook.com', icon: facebook },
   { name: 'Twitter', link: 'https://twitter.com', icon: twitter },
@@ -21,7 +22,7 @@ const socialLinks = [
     </p>
     <ul class="footer__link-list">
       <li class="footer__link" v-for="item in pageLinks" :key="item">
-        <a href="#" class="link">{{ item }}</a>
+        <RouterLink :to="item" class="link">{{ item }}</RouterLink>
       </li>
     </ul>
     <ul class="socials">
@@ -56,10 +57,10 @@ svg {
 
 .footer__link-list {
   grid-area: nav;
-}
-
-.footer__link:not(:first-child) {
-  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
 }
 
 .link {
@@ -82,6 +83,7 @@ svg {
 }
 
 .socials {
+  list-style: none;
   grid-area: socials;
   display: flex;
   gap: 16px;
@@ -96,5 +98,35 @@ svg {
   line-height: 25px;
   color: #ffffff;
   opacity: 0.5;
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 46px;
+    padding-top: 60px;
+    grid-template-areas: 'icon icon' 'nav nav' 'text text' 'copyright socials';
+    gap: 32px;
+    text-align: left;
+  }
+
+  .footer__link-list {
+    flex-direction: row;
+    gap: 34px;
+  }
+
+  .footer__description {
+    margin-bottom: calc(80px - 32px);
+  }
+
+  .socials {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  svg {
+    margin-left: 0;
+  }
 }
 </style>
