@@ -13,7 +13,7 @@ let items = getCategoryItems(category, data)
 
 watch(
   () => route.params.category,
-  (newCategory, old) => {
+  (newCategory) => {
     ;(category = String(newCategory)), (items = getCategoryItems(category, data))
   }
 )

@@ -10,7 +10,7 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/:category',
+      path: '/:category(headphones|earphones|speakers)',
       name: 'category',
       component: () => import('../views/CategoryView.vue')
     },
