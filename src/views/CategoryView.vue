@@ -1,16 +1,30 @@
 <script setup lang="ts">
 import ShopItem from '@/components/ShopItem.vue'
 import data from '../data.json'
-const headphones = data
-  .filter((item) => item.category === 'headphones')
-  .sort((a, b) => Number(b.new) - Number(a.new))
+import { useRoute } from 'vue-router'
+import { watch } from 'vue'
+import getCategoryItems from '@/scripts/sortData'
+
+const route = useRoute()
+
+let category = String(useRoute().params.category)
+
+let items = getCategoryItems(category, data)
+
+watch(
+  () => route.params.category,
+  (newCategory, old) => {
+    ;(category = String(newCategory)), (items = getCategoryItems(category, data))
+  }
+)
 </script>
+
 <template>
   <div class="container">
-    <h1 class="page__header">Headphones</h1>
+    <h1 class="page__header">{{ category }}</h1>
     <ul class="page__list">
       <ShopItem
-        v-for="item in headphones"
+        v-for="item in items"
         :key="item.id"
         :imageSrc="item.image.mobile"
         :name="item.name"

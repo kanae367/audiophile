@@ -10,19 +10,9 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/headphones',
-      name: 'headphones',
-      component: () => import('../views/HeadphonesView.vue')
-    },
-    {
-      path: '/speakers',
-      name: 'speakers',
-      component: () => import('../views/SpeakersView.vue')
-    },
-    {
-      path: '/earphones',
-      name: 'earphones',
-      component: () => import('../views/EarphonesView.vue')
+      path: '/:category',
+      name: 'category',
+      component: () => import('../views/CategoryView.vue')
     },
     {
       path: '/checkout',
