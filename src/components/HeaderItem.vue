@@ -38,7 +38,7 @@ const isLargeScreen = useMediaQuery('(min-width: 1440px)')
 .header::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: 1px;
   left: 24px;
   right: 24px;
   height: 1px;
