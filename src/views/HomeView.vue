@@ -18,10 +18,38 @@ import { RouterLink } from 'vue-router'
           Experience natural, lifelike audio and exceptional build quality made for the passionate
           music enthusiast.
         </p>
-        <RouterLink class="hero__button" to="/">See Product</RouterLink>
+        <RouterLink class="button" to="/">See Product</RouterLink>
       </div>
     </section>
     <CategoriesList />
+    <section id="recommended">
+      <div class="recommended__special">
+        <img
+          class="recommended__special-image"
+          :srcset="'/assets/home/mobile/image-speaker-zx9.png'"
+          alt="zx9 speakers"
+        />
+        <h4 class="recommended__special-title">ZX9 Speaker</h4>
+        <p class="recommended__special-desc">
+          Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.
+        </p>
+        <RouterLink to="/" class="button button_special">See Product</RouterLink>
+      </div>
+      <div class="recommended__item">
+        <img class="recommended__item-image" src="" alt="" />
+        <div class="recommended__item-overlay">
+          <h4 class="recommended__item-title">ZX7 Speaker</h4>
+          <RouterLink to="/" class="button button_bordered">See Product</RouterLink>
+        </div>
+      </div>
+      <div class="recommended__item">
+        <img src="" alt="" />
+        <div class="recommended__item-content">
+          <h4 class="recommended__item-title">YX1 EARPHONES</h4>
+          <RouterLink to="/" class="button button_bordered">See Product</RouterLink>
+        </div>
+      </div>
+    </section>
   </main>
 </template>
 
@@ -73,12 +101,12 @@ import { RouterLink } from 'vue-router'
   font-weight: 500;
   color: #fff;
   opacity: 0.75;
-  margin-bottom: 43px;
+  margin-bottom: 28px;
   text-transform: none;
   max-width: 350px;
 }
 
-.hero__button {
+.button {
   padding: 15px 30px;
   font-size: 13px;
   letter-spacing: 1px;
@@ -87,10 +115,29 @@ import { RouterLink } from 'vue-router'
   text-decoration: none;
   background-color: #d87d4a;
   transition: background-color 0.2s;
+  display: inline-block;
 }
 
-.hero__button:hover {
+.button:hover {
   background-color: #fbaf85;
+}
+
+.button_bordered {
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+}
+
+.button_bordered:hover {
+  background-color: transparent;
+}
+
+.button_special {
+  background-color: black;
+}
+
+.button_special {
+  background-color: black;
 }
 
 @media screen and (min-width: 768px) {
@@ -109,7 +156,7 @@ import { RouterLink } from 'vue-router'
   }
 
   .hero__description {
-    margin-bottom: 55px;
+    margin-bottom: 40px;
   }
 }
 
@@ -120,5 +167,69 @@ import { RouterLink } from 'vue-router'
     padding-left: 165px;
     padding-right: 165px;
   }
+}
+
+#recommended {
+  margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0 24px;
+}
+
+.recommended__special {
+  background-color: #d87d4a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 24px;
+  padding-top: 32px;
+  padding-bottom: 55px;
+  border-radius: 8px;
+}
+
+.recommended__special-image {
+  height: 207px;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.recommended__special-image::before {
+  position: absolute;
+  content: '';
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 1px solid white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.recommended__special-title {
+  font-size: 36px;
+  line-height: 40px;
+  letter-spacing: 1.3px;
+  color: white;
+  margin-bottom: 24px;
+  max-width: 8ch;
+}
+
+.recommended__special-desc {
+  font-size: 15px;
+  line-height: 25px;
+  color: white;
+  opacity: 0.5;
+  margin-bottom: 24px;
+}
+
+.recommended__item:nth-child(2) {
+  position: relative;
+}
+
+.recommended__item-overlay {
+  position: absolute;
+  inset: 0;
 }
 </style>
