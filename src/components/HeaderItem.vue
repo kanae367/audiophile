@@ -33,6 +33,8 @@ const isLargeScreen = useMediaQuery('(min-width: 1440px)')
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 5;
 }
 
 .header::after {
@@ -89,8 +91,8 @@ const isLargeScreen = useMediaQuery('(min-width: 1440px)')
   }
 
   .header::after {
-    padding-right: 165px;
-    padding-left: 165px;
+    left: 165px;
+    right: 165px;
   }
 
   .audiophile-icon {
