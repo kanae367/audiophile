@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CategoriesList from '@/components/CategoriesList.vue'
+import OutroItem from '@/components/OutroItem.vue'
 import { RouterLink } from 'vue-router'
 </script>
 
@@ -62,6 +63,7 @@ import { RouterLink } from 'vue-router'
       </div>
     </section>
   </main>
+  <OutroItem />
 </template>
 
 <style scoped>

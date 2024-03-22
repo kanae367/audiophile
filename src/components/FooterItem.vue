@@ -37,7 +37,7 @@ const socialLinks = [
 
 <style scoped>
 .footer {
-  margin-top: 100%;
+  margin-top: 120px;
   padding-left: 24px;
   padding-right: 24px;
   padding-bottom: 38px;
@@ -94,6 +94,7 @@ svg {
     grid-template-areas: 'icon icon' 'nav nav' 'text text' 'copyright socials';
     gap: 32px;
     text-align: left;
+    margin-top: 96px;
   }
 
   .footer__description {
@@ -118,6 +119,7 @@ svg {
     padding-top: 75px;
     grid-template-areas: 'icon nav' 'text socials' 'copyright copyright';
     gap: 36px;
+    margin-top: 200px;
   }
 
   .footer__description {
