@@ -26,26 +26,37 @@ import { RouterLink } from 'vue-router'
       <div class="recommended__special">
         <img
           class="recommended__special-image"
-          :srcset="'/assets/home/mobile/image-speaker-zx9.png'"
+          :srcset="'/assets/home/mobile/image-speaker-zx9.png 767w, /assets/home/tablet/image-speaker-zx9.png 1439w, /assets/home/desktop/image-speaker-zx9.png 1440w'"
           alt="zx9 speakers"
         />
-        <h4 class="recommended__special-title">ZX9 Speaker</h4>
-        <p class="recommended__special-desc">
-          Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.
-        </p>
-        <RouterLink to="/" class="button button_special">See Product</RouterLink>
+        <div class="recommended__special-content">
+          <h4 class="recommended__special-title">ZX9 Speaker</h4>
+          <p class="recommended__special-desc">
+            Upgrade to premium speakers that are phenomenally built to deliver truly remarkable
+            sound.
+          </p>
+          <RouterLink to="/" class="button button_special">See Product</RouterLink>
+        </div>
       </div>
       <div class="recommended__item">
-        <img class="recommended__item-image" src="" alt="" />
+        <img
+          class="recommended__item-imagebg"
+          :srcset="'/assets/home/mobile/image-speaker-zx7.jpg 767w, /assets/home/tablet/image-speaker-zx7.jpg 1439w, /assets/home/desktop/image-speaker-zx7.jpg 1440w'"
+          alt="zx7 speaker"
+        />
         <div class="recommended__item-overlay">
           <h4 class="recommended__item-title">ZX7 Speaker</h4>
           <RouterLink to="/" class="button button_bordered">See Product</RouterLink>
         </div>
       </div>
       <div class="recommended__item">
-        <img src="" alt="" />
+        <img
+          class="recommended__item-image"
+          :srcset="'/assets/home/mobile/image-earphones-yx1.jpg 767w, /assets/home/tablet/image-earphones-yx1.jpg 1439w, /assets/home/desktop/image-earphones-yx1.jpg 1440w'"
+          alt="yx1 erphones"
+        />
         <div class="recommended__item-content">
-          <h4 class="recommended__item-title">YX1 EARPHONES</h4>
+          <h4 class="recommended__item-title">YX1 Earphones</h4>
           <RouterLink to="/" class="button button_bordered">See Product</RouterLink>
         </div>
       </div>
@@ -114,8 +125,11 @@ import { RouterLink } from 'vue-router'
   color: white;
   text-decoration: none;
   background-color: #d87d4a;
-  transition: background-color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
   display: inline-block;
+  text-transform: uppercase;
 }
 
 .button:hover {
@@ -129,15 +143,16 @@ import { RouterLink } from 'vue-router'
 }
 
 .button_bordered:hover {
-  background-color: transparent;
+  background-color: black;
+  color: white;
 }
 
 .button_special {
   background-color: black;
 }
 
-.button_special {
-  background-color: black;
+.button_special:hover {
+  background-color: #4c4c4c;
 }
 
 @media screen and (min-width: 768px) {
@@ -190,9 +205,14 @@ import { RouterLink } from 'vue-router'
 }
 
 .recommended__special-image {
-  height: 207px;
   margin-bottom: 32px;
   position: relative;
+}
+
+.recommended__special-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .recommended__special-image::before {
@@ -214,6 +234,7 @@ import { RouterLink } from 'vue-router'
   color: white;
   margin-bottom: 24px;
   max-width: 8ch;
+  text-transform: uppercase;
 }
 
 .recommended__special-desc {
@@ -222,6 +243,7 @@ import { RouterLink } from 'vue-router'
   color: white;
   opacity: 0.5;
   margin-bottom: 24px;
+  max-width: 340px;
 }
 
 .recommended__item:nth-child(2) {
@@ -231,5 +253,115 @@ import { RouterLink } from 'vue-router'
 .recommended__item-overlay {
   position: absolute;
   inset: 0;
+  padding-top: 101px;
+  padding-left: 24px;
+}
+
+.recommended__item-imagebg {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.recommended__item-title {
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  text-transform: uppercase;
+}
+
+.recommended__item-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.recommended__item-content {
+  border-radius: 8px;
+  background-color: #f1f1f1;
+  padding-top: 41px;
+  padding-bottom: 41px;
+  padding-left: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  #recommended {
+    padding: 0 40px;
+    margin-top: 96px;
+    gap: 32px;
+  }
+
+  .recommended__special-image {
+    margin-bottom: 64px;
+  }
+
+  .recommended__special-title {
+    font-size: 56px;
+    line-height: 58px;
+    letter-spacing: 2px;
+  }
+
+  .recommended__special-desc {
+    margin-bottom: 40px;
+  }
+
+  .recommended__item-overlay {
+    padding-left: 62px;
+  }
+
+  .recommended__item:last-child {
+    display: grid;
+    gap: 11px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .recommended__item-image {
+    object-fit: cover;
+    margin-bottom: unset;
+  }
+
+  .recommended__item-content {
+    padding-left: 41px;
+    padding-top: 101px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  #recommended {
+    margin-top: 168px;
+    padding-left: 165px;
+    padding-right: 165px;
+  }
+
+  .recommended__special {
+    flex-direction: row;
+    text-align: left;
+    padding-left: 130px;
+    gap: 140px;
+    height: 560px;
+    overflow: hidden;
+  }
+
+  .recommended__special-image {
+    max-height: 493px;
+    position: relative;
+    top: 100px;
+  }
+
+  .recommended__special-content {
+    align-items: flex-start;
+  }
+
+  .recommended__item-overlay {
+    padding-left: 95px;
+  }
+
+  .recommended__item:last-child {
+    gap: 30px;
+  }
+
+  .recommended__item-content {
+    padding-left: 95px;
+  }
 }
 </style>
