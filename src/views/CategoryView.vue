@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import ShopItem from '@/components/ShopItem.vue'
+import CategoriesList from '@/components/CategoriesList.vue'
+import OutroItem from '@/components/OutroItem.vue'
 import data from '../data.json'
 import { useRoute } from 'vue-router'
 import { watch } from 'vue'
@@ -26,13 +28,17 @@ watch(
       <ShopItem
         v-for="item in items"
         :key="item.id"
-        :imageSrc="item.image.mobile"
+        :imageSrc="item.image"
         :name="item.name"
         :description="item.description"
         :isNew="item.new"
       />
     </ul>
   </div>
+
+  <CategoriesList />
+
+  <OutroItem />
 </template>
 
 <style scoped>
@@ -53,5 +59,25 @@ watch(
   display: flex;
   flex-direction: column;
   gap: 120px;
+}
+
+@media screen and (min-width: 768px) {
+  .page__header {
+    padding-bottom: 97px;
+    padding-top: 105px;
+    font-size: 40px;
+    line-height: 44px;
+    letter-spacing: 1.4px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .page__header {
+    margin-bottom: 160px;
+  }
+
+  .page__list {
+    gap: 160px;
+  }
 }
 </style>
