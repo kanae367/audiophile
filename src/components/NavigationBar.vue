@@ -5,7 +5,7 @@ const pageLinks = ['home', 'headphones', 'speakers', 'earphones']
 <template>
   <ul class="list">
     <li v-for="item in pageLinks" :key="item">
-      <RouterLink :to="item === 'home' ? '/' : item" class="link">{{ item }}</RouterLink>
+      <RouterLink :to="item === 'home' ? '/' : '/' + item" class="link">{{ item }}</RouterLink>
     </li>
   </ul>
 </template>

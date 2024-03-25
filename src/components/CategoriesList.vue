@@ -15,7 +15,7 @@ const categories = [
         <h3 class="list__item-header">
           {{ item.name }}
         </h3>
-        <RouterLink :to="item.name" class="list__item-link">Shop</RouterLink>
+        <RouterLink :to="'/' + item.name" class="list__item-link">Shop</RouterLink>
       </li>
     </ul>
   </section>
@@ -28,6 +28,7 @@ const categories = [
   gap: 68px;
   margin-top: 92px;
   align-items: center;
+  justify-content: space-between;
 }
 
 .list__item {
@@ -93,6 +94,10 @@ const categories = [
     gap: 30px;
     padding: 0 165px;
     margin-top: 200px;
+  }
+
+  .list__item {
+    width: 350px;
   }
 }
 </style>

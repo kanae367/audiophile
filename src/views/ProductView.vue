@@ -8,7 +8,8 @@ import { ref, watch } from 'vue'
 const route = useRoute()
 let slug = route.params.slug
 let item = getItemInfo(String(slug))
-let count = ref(0)
+let count = ref(1)
+
 watch(
   () => route.params.slug,
   (newSlug) => {
@@ -33,9 +34,9 @@ watch(
         <p class="product__price">$ {{ item.price }}</p>
         <div class="product__bottom">
           <div class="product__amount">
-            <button class="product__amount-button">-</button>
+            <button class="product__amount-button" @click="count--">-</button>
             {{ count }}
-            <button class="product__amount-button">+</button>
+            <button class="product__amount-button" @click="count++">+</button>
           </div>
           <button class="button">Add To Cart</button>
         </div>
