@@ -19,7 +19,7 @@ watch(
 )
 </script>
 <template>
-  <RouterLink class="product__return" to="/">Go Back</RouterLink>
+  <RouterLink class="return-btn" to="/">Go Back</RouterLink>
   <section v-if="item" id="product">
     <div class="product__header">
       <img
@@ -92,23 +92,12 @@ watch(
 </template>
 
 <style scoped>
+@import '../styles/shared.css';
 #product {
   display: flex;
   flex-direction: column;
   padding: 0 24px;
   gap: 88px;
-}
-
-.product__return {
-  font-size: 15px;
-  padding: 16px 24px;
-  color: black;
-  opacity: 0.5;
-  font-weight: 500;
-  line-height: 25px;
-  margin-bottom: 9px;
-  text-decoration: none;
-  display: inline-block;
 }
 
 .product__image {
@@ -135,14 +124,6 @@ watch(
   letter-spacing: 1px;
   font-weight: bold;
   text-transform: uppercase;
-}
-
-.text {
-  font-size: 15px;
-  line-height: 25px;
-  color: black;
-  opacity: 0.5;
-  font-weight: 500;
 }
 
 .product__price {
@@ -176,25 +157,6 @@ watch(
 
 .product__amount-button:hover {
   color: #d87d4a;
-}
-
-.button {
-  width: 160px;
-  background-color: #d87d4a;
-  color: white;
-  border: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 13px;
-  letter-spacing: 1px;
-  padding: 15px 0;
-  text-decoration: none;
-  transition: background-color 0.2s;
-}
-
-.button:hover {
-  background-color: #fbaf85;
-  cursor: pointer;
 }
 
 .features {
@@ -295,11 +257,6 @@ watch(
     margin-bottom: 20px;
   }
 
-  .product__return {
-    padding: 10px 40px;
-    margin-top: 23px;
-    margin-bottom: 24px;
-  }
   .product__header {
     display: flex;
     gap: 69px;
@@ -373,13 +330,6 @@ watch(
   #product {
     padding: 0 165px;
     gap: 160px;
-  }
-
-  .product__return {
-    padding: 0;
-    margin-left: 165px;
-    margin-top: 76px;
-    margin-bottom: 56px;
   }
 
   .product__header {
