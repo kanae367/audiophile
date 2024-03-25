@@ -9,6 +9,7 @@ const props = defineProps<{
   name: string
   description: string
   isNew: boolean
+  slug: string
 }>()
 </script>
 
@@ -25,7 +26,7 @@ const props = defineProps<{
       <div v-if="props.isNew" class="item__special">New Product</div>
       <h2 class="item__title">{{ props.name }}</h2>
       <p class="item__description">{{ props.description }}</p>
-      <RouterLink to="/" class="item__button">See Product</RouterLink>
+      <RouterLink :to="`/product/${props.slug}`" class="item__button">See Product</RouterLink>
     </div>
   </li>
 </template>

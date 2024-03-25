@@ -32,6 +32,7 @@ watch(
         :name="item.name"
         :description="item.description"
         :isNew="item.new"
+        :slug="item.slug"
       />
     </ul>
   </div>

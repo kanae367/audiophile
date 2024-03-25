@@ -1,3 +1,4 @@
+import data from '../data.json'
 export interface IProduct {
   id: number
   slug: string
@@ -39,4 +40,8 @@ const getCategoryItems = (category: string, array: IProduct[]): IProduct[] => {
   return result
 }
 
+export const getItemInfo = (slug: string): IProduct | false => {
+  const result = data.find((item) => item.slug === slug)
+  return result ? result : false
+}
 export default getCategoryItems
