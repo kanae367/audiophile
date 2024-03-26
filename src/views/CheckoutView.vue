@@ -4,103 +4,105 @@ const cart = [1, 2, 3]
 </script>
 <template>
   <RouterLink class="return-btn" to="/">Go Back</RouterLink>
-  <form class="form" name="checkout">
-    <h1 class="form__title">Checkout</h1>
-    <div class="billing-container">
-      <h2 class="title">Billing Details</h2>
-      <div class="items">
-        <div class="item">
-          <label for="name">Name</label>
-          <input class="input" type="text" id="name" placeholder="Alexei Ward" />
-        </div>
-        <div class="item">
-          <label for="email">Email Address</label>
-          <input class="input" type="text" id="email" placeholder="alexei@mail.com" />
-        </div>
-        <div class="item">
-          <label for="phone">Phone Number</label>
-          <input class="input" type="text" id="phone" placeholder="+1202-555-0136" />
-        </div>
-      </div>
-    </div>
-    <div class="shipping-container">
-      <h2 class="title">Shipping Info</h2>
-      <div class="items">
-        <div class="item">
-          <label for="address">Your Address</label>
-          <input class="input" type="text" id="address" placeholder="1137 Williams Avenue" />
-        </div>
-        <div class="item">
-          <label for="zip">ZIP Code</label>
-          <input class="input" type="text" id="zip" placeholder="10001" />
-        </div>
-        <div class="item">
-          <label for="city">City</label>
-          <input class="input" type="text" id="city" placeholder="New York" />
-        </div>
-        <div class="item">
-          <label for="country">Country</label>
-          <input class="input" type="text" id="country" placeholder="United States" />
-        </div>
-      </div>
-    </div>
-    <div>
-      <h2 class="title">Payment Details</h2>
-      <div class="item">
-        <div class="payment-container">
-          <label>Payment Method</label>
-          <div>
-            <label class="payment-item">
-              <input checked class="payment-radio" type="radio" name="payment" />
-              e-Money
-            </label>
-            <label class="payment-item">
-              <input class="payment-radio" type="radio" name="payment" />
-              Cash on Delivery
-            </label>
+  <div class="form-container">
+    <form class="form" name="checkout">
+      <h1 class="form__title">Checkout</h1>
+      <div class="billing-container">
+        <h2 class="title">Billing Details</h2>
+        <div class="items">
+          <div class="item">
+            <label for="name">Name</label>
+            <input class="input" type="text" id="name" placeholder="Alexei Ward" />
           </div>
           <div class="item">
-            <label for="e-number">e-Money Number</label>
-            <input class="input" type="text" id="e-number" placeholder="238521993" />
+            <label for="email">Email Address</label>
+            <input class="input" type="text" id="email" placeholder="alexei@mail.com" />
           </div>
           <div class="item">
-            <label for="pin">e-Money PIN</label>
-            <input class="input" type="text" id="pin" placeholder="6891" />
+            <label for="phone">Phone Number</label>
+            <input class="input" type="text" id="phone" placeholder="+1202-555-0136" />
           </div>
         </div>
       </div>
-    </div>
-  </form>
-  <div class="summary">
-    <h2 class="summary__title">Summary</h2>
-    <ul class="summary__list">
-      <li class="summary__list-item" v-for="item in cart" :key="item"></li>
-    </ul>
-    <ul class="summary__result">
-      <li class="summary__result-item">
-        Total
-        <span class="accent">$ 5,396</span>
-      </li>
-      <li class="summary__result-item">
-        Shipping
-        <span class="accent">$ 50</span>
-      </li>
-      <li class="summary__result-item">
-        Vat (included)
-        <span class="accent">$ 1,079</span>
-      </li>
-    </ul>
+      <div class="shipping-container">
+        <h2 class="title">Shipping Info</h2>
+        <div class="items">
+          <div class="item">
+            <label for="address">Your Address</label>
+            <input class="input" type="text" id="address" placeholder="1137 Williams Avenue" />
+          </div>
+          <div class="item">
+            <label for="zip">ZIP Code</label>
+            <input class="input" type="text" id="zip" placeholder="10001" />
+          </div>
+          <div class="item">
+            <label for="city">City</label>
+            <input class="input" type="text" id="city" placeholder="New York" />
+          </div>
+          <div class="item">
+            <label for="country">Country</label>
+            <input class="input" type="text" id="country" placeholder="United States" />
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 class="title">Payment Details</h2>
+        <div class="item">
+          <div class="payment-container">
+            <label>Payment Method</label>
+            <div>
+              <label class="payment-item">
+                <input checked class="payment-radio" type="radio" name="payment" />
+                e-Money
+              </label>
+              <label class="payment-item">
+                <input class="payment-radio" type="radio" name="payment" />
+                Cash on Delivery
+              </label>
+            </div>
+            <div class="item">
+              <label for="e-number">e-Money Number</label>
+              <input class="input" type="text" id="e-number" placeholder="238521993" />
+            </div>
+            <div class="item">
+              <label for="pin">e-Money PIN</label>
+              <input class="input" type="text" id="pin" placeholder="6891" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="summary">
+      <h2 class="summary__title">Summary</h2>
+      <ul class="summary__list">
+        <li class="summary__list-item" v-for="item in cart" :key="item"></li>
+      </ul>
+      <ul class="summary__result">
+        <li class="summary__result-item">
+          Total
+          <span class="accent">$ 5,396</span>
+        </li>
+        <li class="summary__result-item">
+          Shipping
+          <span class="accent">$ 50</span>
+        </li>
+        <li class="summary__result-item">
+          Vat (included)
+          <span class="accent">$ 1,079</span>
+        </li>
+      </ul>
 
-    <div class="summary__result-item">
-      Grand Total
-      <span class="accent_brown accent">$ 5,446</span>
+      <div class="summary__result-item">
+        Grand Total
+        <span class="accent_brown accent">$ 5,446</span>
+      </div>
+      <button form="checkout" class="button button_wide">Continue & Pay</button>
     </div>
-    <button form="checkout" class="button button_wide">Continue & Pay</button>
   </div>
 </template>
 
 <style scoped>
-@import '../styles/shared.css';
+@import '../assets/shared.css';
 .form {
   margin: 0 24px;
   background-color: white;
@@ -244,6 +246,11 @@ label {
     padding: 30px 27px;
   }
 
+  .summary {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
   .form__title {
     font-size: 32px;
     line-height: 36px;
@@ -294,6 +301,31 @@ label {
 
   .payment-container .item:last-child {
     margin-top: 0;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .form {
+    margin: 0;
+    width: 730px;
+  }
+
+  .summary {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    width: 350px;
+  }
+
+  .form-container {
+    display: flex;
+    gap: 30px;
+    margin: 0 165px;
+    align-items: flex-start;
+  }
+
+  .billing-container .input {
+    max-width: 330px;
   }
 }
 </style>

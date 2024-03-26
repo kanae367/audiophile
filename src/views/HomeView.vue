@@ -36,7 +36,9 @@ import { RouterLink } from 'vue-router'
             Upgrade to premium speakers that are phenomenally built to deliver truly remarkable
             sound.
           </p>
-          <RouterLink to="/" class="button button_special">See Product</RouterLink>
+          <RouterLink to="/product/zx9-speaker" class="button button_special"
+            >See Product</RouterLink
+          >
         </div>
       </div>
       <div class="recommended__item">
@@ -47,7 +49,9 @@ import { RouterLink } from 'vue-router'
         />
         <div class="recommended__item-overlay">
           <h4 class="recommended__item-title">ZX7 Speaker</h4>
-          <RouterLink to="/" class="button button_bordered">See Product</RouterLink>
+          <RouterLink to="/product/zx7-speaker" class="button button_bordered"
+            >See Product</RouterLink
+          >
         </div>
       </div>
       <div class="recommended__item">
@@ -58,7 +62,9 @@ import { RouterLink } from 'vue-router'
         />
         <div class="recommended__item-content">
           <h4 class="recommended__item-title">YX1 Earphones</h4>
-          <RouterLink to="/" class="button button_bordered">See Product</RouterLink>
+          <RouterLink to="/product/yx1-earphones" class="button button_bordered"
+            >See Product</RouterLink
+          >
         </div>
       </div>
     </section>

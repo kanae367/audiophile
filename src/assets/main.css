@@ -1,5 +1,8 @@
 @import './base.css';
 
+html {
+  background-color: #fafafa;
+}
 #app {
   min-width: 375px;
   max-width: 1440px;

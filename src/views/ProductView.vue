@@ -92,7 +92,7 @@ watch(
 </template>
 
 <style scoped>
-@import '../styles/shared.css';
+@import '../assets/shared.css';
 #product {
   display: flex;
   flex-direction: column;
