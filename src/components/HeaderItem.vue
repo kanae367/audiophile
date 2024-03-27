@@ -2,7 +2,11 @@
 import AudiophileIcon from './icons/AudiophileIcon.vue'
 import CartIcon from './icons/CartIcon.vue'
 import NavigationBar from './NavigationBar.vue'
+import CartItem from './CartItem.vue'
 import { useMediaQuery } from '@vueuse/core'
+import { useCart } from '../scripts/store'
+const cart = useCart()
+
 const isLargeScreen = useMediaQuery('(min-width: 1440px)')
 </script>
 <template>
@@ -19,10 +23,12 @@ const isLargeScreen = useMediaQuery('(min-width: 1440px)')
       <NavigationBar />
     </nav>
 
-    <button class="cart-button">
+    <button class="cart-button" @click="cart.changeVisibility">
       <CartIcon />
     </button>
   </header>
+
+  <CartItem v-if="cart.isVisible" />
 </template>
 
 <style>

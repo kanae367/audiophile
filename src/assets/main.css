@@ -2,7 +2,9 @@
 
 html {
   background-color: #fafafa;
+  overflow-x: hidden;
 }
+
 #app {
   min-width: 375px;
   max-width: 1440px;
@@ -11,4 +13,5 @@ html {
   display: flex;
   flex-direction: column;
   background-color: #fafafa;
+  position: relative;
 }
