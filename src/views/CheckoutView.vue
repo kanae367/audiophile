@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-const cart = [1, 2, 3]
+import { useCart } from '@/scripts/store'
+const cart = useCart()
+const products = cart.products
 </script>
 <template>
   <RouterLink class="return-btn" to="/">Go Back</RouterLink>
@@ -75,12 +77,12 @@ const cart = [1, 2, 3]
     <div class="summary">
       <h2 class="summary__title">Summary</h2>
       <ul class="summary__list">
-        <li class="summary__list-item" v-for="item in cart" :key="item"></li>
+        <li class="summary__list-item" v-for="item in products" :key="item.slug"></li>
       </ul>
       <ul class="summary__result">
         <li class="summary__result-item">
           Total
-          <span class="accent">$ 5,396</span>
+          <span class="accent">$ {{ products.reduce((acc, next) => acc + next.price, 0) }}</span>
         </li>
         <li class="summary__result-item">
           Shipping
@@ -88,13 +90,17 @@ const cart = [1, 2, 3]
         </li>
         <li class="summary__result-item">
           Vat (included)
-          <span class="accent">$ 1,079</span>
+          <span class="accent"
+            >$ {{ Math.floor(products.reduce((acc, next) => acc + next.price, 0) * 0.2) }}</span
+          >
         </li>
       </ul>
 
       <div class="summary__result-item">
         Grand Total
-        <span class="accent_brown accent">$ 5,446</span>
+        <span class="accent_brown accent"
+          >$ {{ products.reduce((acc, next) => acc + next.price, 0) + 50 }}</span
+        >
       </div>
       <button form="checkout" class="button button_wide">Continue & Pay</button>
     </div>
