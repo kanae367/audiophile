@@ -4,8 +4,10 @@ import CategoriesList from '@/components/CategoriesList.vue'
 import { getItemInfo } from '../scripts/sortData'
 import { RouterLink, useRoute } from 'vue-router'
 import { ref, watch } from 'vue'
+import { useCart } from '@/scripts/store'
 
 const route = useRoute()
+const cart = useCart()
 let slug = route.params.slug
 let item = getItemInfo(String(slug))
 let count = ref(1)
@@ -17,6 +19,20 @@ watch(
     item = getItemInfo(String(newSlug))
   }
 )
+
+function handleAddClick() {
+  if (item === false) return
+
+  const product = {
+    id: item.id,
+    slug: item.slug,
+    price: item.price,
+    name: item.name,
+    amount: count.value
+  }
+
+  cart.add(product)
+}
 </script>
 <template>
   <RouterLink class="return-btn" to="/">Go Back</RouterLink>
@@ -38,7 +54,7 @@ watch(
             {{ count }}
             <button class="product__amount-button" @click="count++">+</button>
           </div>
-          <button class="button">Add To Cart</button>
+          <button class="button" @click="handleAddClick">Add To Cart</button>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@
 import { RouterLink } from 'vue-router'
 import { useCart } from '@/scripts/store'
 const cart = useCart()
-const products = ['1', '2', '3']
+const products = cart.products
 
 function handleModalClick(e: Event) {
   const target = e.target as HTMLElement
@@ -16,22 +16,24 @@ function handleModalClick(e: Event) {
   <div class="modal">
     <div class="modal__header">
       <h2 class="modal__title">Cart {{ products.length }}</h2>
-      <button class="modal__header-button">Remove all</button>
+      <button class="modal__header-button" @click="cart.clearAll">Remove all</button>
     </div>
 
     <ul class="list">
-      <li v-for="item in products" :key="item" class="list__item">
+      <li v-for="item in products" :key="item.slug" class="list__item">
         <img src="" alt="" />
         <div class="list__item-info">
-          <h3 class="list__item-title">{{ item }}</h3>
-          <p class="list__item-price">{{ item }}</p>
+          <h3 class="list__item-title">{{ item.name }}</h3>
+          <p class="list__item-price">$ {{ item.price }}</p>
         </div>
       </li>
     </ul>
 
     <div class="modal__bottom">
       Total
-      <span class="modal__bottom-accent">$ 5555</span>
+      <span class="modal__bottom-accent"
+        >$ {{ products.reduce((acc, next) => acc + next.price * next.amount, 0) }}</span
+      >
     </div>
 
     <RouterLink to="/checkout" @click="cart.changeVisibility" class="button button_modal"
