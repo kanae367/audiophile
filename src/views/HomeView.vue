@@ -19,7 +19,7 @@ import { RouterLink } from 'vue-router'
           Experience natural, lifelike audio and exceptional build quality made for the passionate
           music enthusiast.
         </p>
-        <RouterLink class="button" to="/xx99-mark-two-headphones">See Product</RouterLink>
+        <RouterLink class="button" to="/product/xx99-mark-two-headphones">See Product</RouterLink>
       </div>
     </section>
     <CategoriesList />

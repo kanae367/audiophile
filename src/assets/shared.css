@@ -17,6 +17,10 @@
   background-color: #fbaf85;
 }
 
+.button:disabled {
+  filter: grayscale(1);
+}
+
 .text {
   font-size: 15px;
   line-height: 25px;

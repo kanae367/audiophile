@@ -77,7 +77,10 @@ const products = cart.products
     <div class="summary">
       <h2 class="summary__title">Summary</h2>
       <ul class="summary__list">
-        <li class="summary__list-item" v-for="item in products" :key="item.slug"></li>
+        <li class="summary__list-item" v-for="item in products" :key="item.slug">
+          <img :src="`/assets/cart/image-${item.slug}.jpg`" :alt="item.name" />
+          <div class="summary__item-desc"></div>
+        </li>
       </ul>
       <ul class="summary__result">
         <li class="summary__result-item">
@@ -102,7 +105,9 @@ const products = cart.products
           >$ {{ products.reduce((acc, next) => acc + next.price, 0) + 50 }}</span
         >
       </div>
-      <button form="checkout" class="button button_wide">Continue & Pay</button>
+      <button form="checkout" class="button button_wide" :disabled="products.length ? false : true">
+        Continue & Pay
+      </button>
     </div>
   </div>
 </template>

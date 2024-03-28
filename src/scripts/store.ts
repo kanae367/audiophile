@@ -8,31 +8,6 @@ interface CartProduct {
   amount: number
 }
 
-// export const useCart = defineStore('cart', {
-//   state: (): {
-//     products: CartProduct[]
-//     isVisible: boolean
-//   } => ({
-//     products: [],
-//     isVisible: false
-//   }),
-//   actions: {
-//     changeVisibility() {
-//       this.isVisible = !this.isVisible
-//     },
-//     add(item: CartProduct) {
-//       const product = this.products.find((prev) => prev.slug === item.slug)
-//       product ? (product.amount += item.amount) : this.products.push(item)
-//     },
-//     remove(slug: string) {
-//       this.products.filter((item) => item.slug === slug)
-//     },
-//     clearAll() {
-//       this.products = []
-//     }
-//   }
-// })
-
 export const useCart = defineStore('cart', () => {
   const products: CartProduct[] = reactive([])
   const isVisible = ref(false)
@@ -46,12 +21,20 @@ export const useCart = defineStore('cart', () => {
     product ? (product.amount += item.amount) : products.push(item)
   }
 
-  const remove = (slug: string) => {
-    console.log(products, slug)
-  }
-
   const clearAll = () => {
     products.length = 0
+  }
+
+  const changeAmount = (product: CartProduct, increment: boolean) => {
+    const item = products.find((item) => item.slug === product.slug)
+
+    if (increment) {
+      item!.amount++
+    } else {
+      item!.amount--
+      const index = products.findIndex((item) => item.amount === 0)
+      index != -1 && products.splice(index, 1)
+    }
   }
 
   return {
@@ -59,7 +42,7 @@ export const useCart = defineStore('cart', () => {
     isVisible,
     changeVisibility,
     add,
-    remove,
+    changeAmount,
     clearAll
   }
 })
