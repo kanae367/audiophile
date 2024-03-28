@@ -78,8 +78,16 @@ const products = cart.products
       <h2 class="summary__title">Summary</h2>
       <ul class="summary__list">
         <li class="summary__list-item" v-for="item in products" :key="item.slug">
-          <img :src="`/assets/cart/image-${item.slug}.jpg`" :alt="item.name" />
-          <div class="summary__item-desc"></div>
+          <img
+            class="summary__item-image"
+            :src="`/assets/cart/image-${item.slug}.jpg`"
+            :alt="item.name"
+          />
+          <div class="summary__item-desc">
+            <div class="summary__item-title">{{ item.name.split(' ')[0] }}</div>
+            <div class="summary__item-price">$ {{ item.price }}</div>
+          </div>
+          <div class="summary__item-amount">x{{ item.amount }}</div>
         </li>
       </ul>
       <ul class="summary__result">
@@ -198,6 +206,10 @@ label {
 
 .summary__list {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 32px;
 }
 
 .summary__result {
@@ -218,7 +230,40 @@ label {
   justify-content: space-between;
 }
 
-.accent {
+.summary__list-item {
+  display: flex;
+}
+
+.summary__item-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  margin-right: 16px;
+}
+
+.summary__item-desc {
+  font-size: 15px;
+  line-height: 25px;
+  font-weight: bold;
+  text-transform: uppercase;
+  align-self: center;
+}
+
+.summary__item-amount {
+  margin-left: auto;
+  margin-top: 7px;
+  font-size: 15px;
+  line-height: 25px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.summary__item-price {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+}
+
+.summary .accent {
   color: black;
   font-weight: bold;
   font-size: 18px;
