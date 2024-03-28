@@ -87,6 +87,10 @@ const categories = [
     padding: 0 40px;
     margin-top: 150px;
   }
+
+  .menu .list {
+    margin-top: 108px;
+  }
 }
 
 @media screen and (min-width: 1440px) {

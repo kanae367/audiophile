@@ -27,7 +27,7 @@ function handleModalClick(e: Event) {
           :alt="item.name"
         />
         <div class="list__item-info">
-          <h3 class="list__item-title">{{ item.name }}</h3>
+          <h3 class="list__item-title">{{ item.name.split(' ')[0] }}</h3>
           <p class="list__item-price">$ {{ item.price }}</p>
         </div>
         <div class="list__item-buttons">
