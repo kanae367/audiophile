@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import CheckoutIcon from '@/components/icons/CheckoutIcon.vue'
+import OrderPopup from '@/components/OrderPopup.vue'
 import { useCart } from '@/scripts/store'
 import { ref } from 'vue'
 import { form } from '../scripts/formSchema'
@@ -19,15 +20,18 @@ const result: any = {
   'e-num': ''
 }
 
+const isOrderPopupOpen = ref(false)
 const paymentMethod = ref('e-money')
 
 const handleFormSubmit = (e: Event) => {
   e.preventDefault()
-  console.log(result)
+
+  isOrderPopupOpen.value = true
 }
 </script>
 <template>
   <RouterLink class="return-btn" to="/">Go Back</RouterLink>
+  <OrderPopup v-if="isOrderPopupOpen && products.length" />
   <div class="form-container">
     <form id="checkout" class="form" name="checkout" @submit="handleFormSubmit">
       <h1 class="form__title">Checkout</h1>
