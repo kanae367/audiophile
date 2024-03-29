@@ -1,49 +1,68 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import CheckoutIcon from '@/components/icons/CheckoutIcon.vue'
 import { useCart } from '@/scripts/store'
+import { ref } from 'vue'
+import { form } from '../scripts/formSchema'
 const cart = useCart()
 const products = cart.products
+
+const result: any = {
+  name: '',
+  phone: '',
+  email: '',
+  address: '',
+  zip: '',
+  city: '',
+  country: '',
+  pin: '',
+  'e-num': ''
+}
+
+const paymentMethod = ref('e-money')
+
+const handleFormSubmit = (e: Event) => {
+  e.preventDefault()
+  console.log(result)
+}
 </script>
 <template>
   <RouterLink class="return-btn" to="/">Go Back</RouterLink>
   <div class="form-container">
-    <form class="form" name="checkout">
+    <form id="checkout" class="form" name="checkout" @submit="handleFormSubmit">
       <h1 class="form__title">Checkout</h1>
       <div class="billing-container">
         <h2 class="title">Billing Details</h2>
         <div class="items">
-          <div class="item">
-            <label for="name">Name</label>
-            <input class="input" type="text" id="name" placeholder="Alexei Ward" />
-          </div>
-          <div class="item">
-            <label for="email">Email Address</label>
-            <input class="input" type="text" id="email" placeholder="alexei@mail.com" />
-          </div>
-          <div class="item">
-            <label for="phone">Phone Number</label>
-            <input class="input" type="text" id="phone" placeholder="+1202-555-0136" />
+          <div class="item" v-for="item in form.billingDetails" :key="item.name">
+            <label :for="item.name">{{ item.label }}</label>
+            <input
+              class="input"
+              v-model="result[item.name]"
+              :type="item.type"
+              :id="item.name"
+              :placeholder="item.placeholder"
+              required
+            />
           </div>
         </div>
       </div>
       <div class="shipping-container">
         <h2 class="title">Shipping Info</h2>
         <div class="items">
-          <div class="item">
-            <label for="address">Your Address</label>
-            <input class="input" type="text" id="address" placeholder="1137 Williams Avenue" />
-          </div>
-          <div class="item">
-            <label for="zip">ZIP Code</label>
-            <input class="input" type="text" id="zip" placeholder="10001" />
-          </div>
-          <div class="item">
-            <label for="city">City</label>
-            <input class="input" type="text" id="city" placeholder="New York" />
-          </div>
-          <div class="item">
-            <label for="country">Country</label>
-            <input class="input" type="text" id="country" placeholder="United States" />
+          <div class="item" v-for="item in form.shippingInfo" :key="item.name">
+            <div class="item__top">
+              <label :for="item.name">{{ item.label }}</label>
+              <span class="error"></span>
+            </div>
+            <input
+              class="input"
+              :type="item.type"
+              :id="item.name"
+              :placeholder="item.placeholder"
+              v-model="result[item.name]"
+              required
+            />
           </div>
         </div>
       </div>
@@ -53,23 +72,38 @@ const products = cart.products
           <div class="payment-container">
             <label>Payment Method</label>
             <div>
-              <label class="payment-item">
-                <input checked class="payment-radio" type="radio" name="payment" />
-                e-Money
+              <label v-for="item in form.paymentDetails" :key="item.label" class="payment-item">
+                <input
+                  :checked="form.paymentDetails[0] === item"
+                  class="payment-radio"
+                  :value="item.value"
+                  :type="item.type"
+                  v-model="paymentMethod"
+                  :name="item.name"
+                  required
+                />
+                {{ item.label }}
               </label>
-              <label class="payment-item">
-                <input class="payment-radio" type="radio" name="payment" />
-                Cash on Delivery
-              </label>
             </div>
-            <div class="item">
-              <label for="e-number">e-Money Number</label>
-              <input class="input" type="text" id="e-number" placeholder="238521993" />
+          </div>
+          <div class="e-container" v-if="paymentMethod === 'e-money'">
+            <div class="item" v-for="item in form.paymentDetails[0].data" :key="item.name">
+              <label :for="item.name">{{ item.label }}</label>
+              <input
+                class="input"
+                :type="item.type"
+                :id="item.name"
+                :placeholder="item.placeholder"
+                v-model="result[item.name]"
+                required
+              />
             </div>
-            <div class="item">
-              <label for="pin">e-Money PIN</label>
-              <input class="input" type="text" id="pin" placeholder="6891" />
-            </div>
+          </div>
+          <div class="cash-bottom" v-else>
+            <CheckoutIcon class="checkout-icon" />
+            The ‘Cash on Delivery’ option enables you to pay in cash when our delivery courier
+            arrives at your residence. Just make sure your address is correct so that your order
+            will not be cancelled.
           </div>
         </div>
       </div>
@@ -113,8 +147,13 @@ const products = cart.products
           >$ {{ products.reduce((acc, next) => acc + next.price, 0) + 50 }}</span
         >
       </div>
-      <button form="checkout" class="button button_wide" :disabled="products.length ? false : true">
-        Continue & Pay
+      <button
+        form="checkout"
+        type="submit"
+        class="button button_wide"
+        :disabled="products.length ? false : true"
+      >
+        Continue {{ paymentMethod === 'e-money' ? '& Pay' : '' }}
       </button>
     </div>
   </div>
@@ -382,6 +421,41 @@ label {
 
   .billing-container .input {
     max-width: 330px;
+  }
+}
+
+.cash-bottom {
+  display: flex;
+  margin-top: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 25px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.e-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .e-container {
+    flex-direction: row;
+  }
+
+  .cash-bottom {
+    flex-direction: row;
+    text-align: left;
+    gap: 32px;
+  }
+
+  .checkout-icon {
+    flex-shrink: 0;
   }
 }
 </style>
