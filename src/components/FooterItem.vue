@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import AudiophileIcon from './icons/AudiophileIcon.vue'
-import facebook from './icons/facebook.svg'
-import twitter from './icons/twitter.svg'
-import instagram from './icons/instagram.svg'
+import FacebookIcon from './icons/FacebookIcon.vue'
+import InstagramIcon from './icons/InstagramIcon.vue'
+import TwitterIcon from './icons/TwitterIcon.vue'
 import NavigationBar from './NavigationBar.vue'
-const socialLinks = [
-  { name: 'Facebook', link: 'https://facebook.com', icon: facebook },
-  { name: 'Twitter', link: 'https://twitter.com', icon: twitter },
-  { name: 'Instagram', link: 'https://instagram.com', icon: instagram }
-]
 </script>
 
 <template>
@@ -25,10 +20,20 @@ const socialLinks = [
     </div>
 
     <ul class="socials">
-      <li class="socials__icon" v-for="item in socialLinks" :key="item.name">
-        <a :href="item.link" class="socials__icon-link"
-          ><img :src="item.icon" :alt="item.name"
-        /></a>
+      <li class="socials__icon">
+        <a href="https://facebook.com" class="socials__icon-link">
+          <FacebookIcon class="link-icon" />
+        </a>
+      </li>
+      <li class="socials__icon">
+        <a href="https://twitter.com" class="socials__icon-link">
+          <TwitterIcon class="link-icon" />
+        </a>
+      </li>
+      <li class="socials__icon">
+        <a href="https://instagram.com" class="socials__icon-link">
+          <InstagramIcon class="link-icon" />
+        </a>
       </li>
     </ul>
     <p class="footer__copyright">Copyright 2024. All Rights Reserved</p>
@@ -83,6 +88,13 @@ svg {
   line-height: 25px;
   color: #ffffff;
   opacity: 0.5;
+}
+
+.socials__icon svg {
+  transition: fill 0.2s;
+}
+.socials__icon:hover svg {
+  fill: #d87d4a;
 }
 
 @media screen and (min-width: 768px) {
