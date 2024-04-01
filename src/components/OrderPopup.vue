@@ -1,10 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import CheckedIcon from './icons/CheckedIcon.vue'
 import { useCart } from '@/scripts/store'
 import { ref } from 'vue'
 const cart = useCart()
-const mostExpensive = cart.products.sort((a, b) => a.price * a.amount < b.price * b.amount)
+const mostExpensive = cart.products.sort((a, b): any => a.price * a.amount < b.price * b.amount)
 const isOpen = ref(false)
 </script>
 <template>
