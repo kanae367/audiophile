@@ -5,6 +5,29 @@ import OrderPopup from '@/components/OrderPopup.vue'
 import { useCart } from '@/scripts/store'
 import { ref } from 'vue'
 import { form } from '../scripts/formSchema'
+import { useForm } from 'vee-validate'
+
+function required(value: any) {
+  return value ? true : 'This field is required'
+}
+const { defineField, handleSubmit, errors } = useForm({
+  validationSchema: {
+    name: required,
+    phone: required,
+    email: required,
+    address: required,
+    zip: required,
+    city: required,
+    country: required,
+    pin: required,
+    enum: required
+  }
+})
+
+const [name, nameProps] = defineField('name')
+const [phone, phoneProps] = defineField('phone')
+const [email, emailProps] = defineField('email')
+
 const cart = useCart()
 const products = cart.products
 
@@ -23,29 +46,56 @@ const result: any = {
 const isOrderPopupOpen = ref(false)
 const paymentMethod = ref('e-money')
 
-const handleFormSubmit = (e: Event) => {
-  e.preventDefault()
-
+const onSubmit = handleSubmit((values) => {
   isOrderPopupOpen.value = true
-}
+  console.log(values)
+})
 </script>
 <template>
   <RouterLink class="return-btn" to="/">Go Back</RouterLink>
   <OrderPopup v-if="isOrderPopupOpen && products.length" />
   <div class="form-container">
-    <form id="checkout" class="form" name="checkout" @submit="handleFormSubmit">
+    <form id="checkout" class="form" name="checkout" @submit="onSubmit">
       <h1 class="form__title">Checkout</h1>
       <div class="billing-container">
         <h2 class="title">Billing Details</h2>
         <div class="items">
-          <div class="item" v-for="item in form.billingDetails" :key="item.name">
-            <label :for="item.name">{{ item.label }}</label>
+          <div class="item">
+            <label for="name"
+              >Name <span class="error">{{ errors.name }}</span></label
+            >
             <input
               class="input"
-              v-model="result[item.name]"
-              :type="item.type"
-              :id="item.name"
-              :placeholder="item.placeholder"
+              v-model="name"
+              v-bind="nameProps"
+              id="name"
+              placeholder="Alexei Ward"
+              required
+            />
+          </div>
+          <div class="item">
+            <label for="email"
+              >Email Address <span class="error">{{ errors.email }}</span></label
+            >
+            <input
+              class="input"
+              v-model="email"
+              v-bind="emailProps"
+              id="email"
+              placeholder="alexei@mail.com"
+              required
+            />
+          </div>
+          <div class="item">
+            <label for="phone"
+              >Phone Number <span class="error">{{ errors.phone }}</span></label
+            >
+            <input
+              class="input"
+              v-model="phone"
+              v-bind="phoneProps"
+              id="phone"
+              placeholder="+1 (202) 555-0136"
               required
             />
           </div>
