@@ -4,47 +4,38 @@ import CheckoutIcon from '@/components/icons/CheckoutIcon.vue'
 import OrderPopup from '@/components/OrderPopup.vue'
 import { useCart } from '@/scripts/store'
 import { ref } from 'vue'
-import { form } from '../scripts/formSchema'
 import { useForm } from 'vee-validate'
+import * as yup from 'yup'
 
-function required(value: any) {
-  return value ? true : 'This field is required'
-}
+const paymentMethod = ref('e-money')
+
 const { defineField, handleSubmit, errors } = useForm({
   validationSchema: {
-    name: required,
-    phone: required,
-    email: required,
-    address: required,
-    zip: required,
-    city: required,
-    country: required,
-    pin: required,
-    enum: required
+    name: yup.string().required('Cannot be empty'),
+    phone: yup.number().required('Cannot be empty'),
+    email: yup.string().required('Cannot be empty').email('Wrong format'),
+    address: yup.string().required('Cannot be empty'),
+    zip: yup.number().required('Cannot be empty'),
+    city: yup.string().required('Cannot be empty'),
+    country: yup.string().required('Cannot be empty'),
+    pin: yup.number().required('Cannot be empty'),
+    eNum: yup.number().required('Cannot be empty')
   }
 })
 
 const [name, nameProps] = defineField('name')
 const [phone, phoneProps] = defineField('phone')
 const [email, emailProps] = defineField('email')
+const [address, addressProps] = defineField('address')
+const [zip, zipProps] = defineField('zip')
+const [city, cityProps] = defineField('city')
+const [country, countryProps] = defineField('country')
+const [eNum, eNumProps] = defineField('eNum')
+const [pin, pinProps] = defineField('pin')
 
 const cart = useCart()
 const products = cart.products
-
-const result: any = {
-  name: '',
-  phone: '',
-  email: '',
-  address: '',
-  zip: '',
-  city: '',
-  country: '',
-  pin: '',
-  'e-num': ''
-}
-
 const isOrderPopupOpen = ref(false)
-const paymentMethod = ref('e-money')
 
 const onSubmit = handleSubmit((values) => {
   isOrderPopupOpen.value = true
@@ -60,7 +51,7 @@ const onSubmit = handleSubmit((values) => {
       <div class="billing-container">
         <h2 class="title">Billing Details</h2>
         <div class="items">
-          <div class="item">
+          <div :class="`item ${errors.name ? 'item_error' : ''}`">
             <label for="name"
               >Name <span class="error">{{ errors.name }}</span></label
             >
@@ -70,10 +61,9 @@ const onSubmit = handleSubmit((values) => {
               v-bind="nameProps"
               id="name"
               placeholder="Alexei Ward"
-              required
             />
           </div>
-          <div class="item">
+          <div :class="`item ${errors.email ? 'item_error' : ''}`">
             <label for="email"
               >Email Address <span class="error">{{ errors.email }}</span></label
             >
@@ -83,10 +73,9 @@ const onSubmit = handleSubmit((values) => {
               v-bind="emailProps"
               id="email"
               placeholder="alexei@mail.com"
-              required
             />
           </div>
-          <div class="item">
+          <div :class="`item ${errors.phone ? 'item_error' : ''}`">
             <label for="phone"
               >Phone Number <span class="error">{{ errors.phone }}</span></label
             >
@@ -96,7 +85,6 @@ const onSubmit = handleSubmit((values) => {
               v-bind="phoneProps"
               id="phone"
               placeholder="+1 (202) 555-0136"
-              required
             />
           </div>
         </div>
@@ -104,18 +92,54 @@ const onSubmit = handleSubmit((values) => {
       <div class="shipping-container">
         <h2 class="title">Shipping Info</h2>
         <div class="items">
-          <div class="item" v-for="item in form.shippingInfo" :key="item.name">
+          <div :class="`item ${errors.address ? 'item_error' : ''}`">
             <div class="item__top">
-              <label :for="item.name">{{ item.label }}</label>
-              <span class="error"></span>
+              <label for="address"
+                >Address <span class="error">{{ errors.address }}</span></label
+              >
             </div>
             <input
               class="input"
-              :type="item.type"
-              :id="item.name"
-              :placeholder="item.placeholder"
-              v-model="result[item.name]"
-              required
+              id="address"
+              placeholder="1137 Williams Avenue"
+              v-model="address"
+              v-bind="addressProps"
+            />
+          </div>
+          <div :class="`item ${errors.zip ? 'item_error' : ''}`">
+            <div class="item__top">
+              <label for="zip"
+                >ZIP Code<span class="error">{{ errors.zip }}</span></label
+              >
+            </div>
+            <input class="input" id="zip" placeholder="10001" v-model="zip" v-bind="zipProps" />
+          </div>
+          <div :class="`item ${errors.city ? 'item_error' : ''}`">
+            <div class="item__top">
+              <label for="city"
+                >City <span class="error">{{ errors.city }}</span></label
+              >
+            </div>
+            <input
+              class="input"
+              id="city"
+              placeholder="New York"
+              v-model="city"
+              v-bind="cityProps"
+            />
+          </div>
+          <div :class="`item ${errors.country ? 'item_error' : ''}`">
+            <div class="item__top">
+              <label for="country"
+                >Country <span class="error">{{ errors.country }}</span></label
+              >
+            </div>
+            <input
+              class="input"
+              id="country"
+              placeholder="United States"
+              v-model="country"
+              v-bind="countryProps"
             />
           </div>
         </div>
@@ -126,31 +150,44 @@ const onSubmit = handleSubmit((values) => {
           <div class="payment-container">
             <label>Payment Method</label>
             <div>
-              <label v-for="item in form.paymentDetails" :key="item.label" class="payment-item">
+              <label for="payment" class="payment-item">
                 <input
-                  :checked="form.paymentDetails[0] === item"
+                  type="radio"
+                  checked
                   class="payment-radio"
-                  :value="item.value"
-                  :type="item.type"
+                  value="e-money"
                   v-model="paymentMethod"
-                  :name="item.name"
-                  required
+                  name="payment"
                 />
-                {{ item.label }}
+                e-Money
+              </label>
+              <label for="payment" class="payment-item">
+                <input
+                  type="radio"
+                  checked
+                  class="payment-radio"
+                  value="cash"
+                  v-model="paymentMethod"
+                  name="payment"
+                />
+                Cash on Delivery
               </label>
             </div>
           </div>
           <div class="e-container" v-if="paymentMethod === 'e-money'">
-            <div class="item" v-for="item in form.paymentDetails[0].data" :key="item.name">
-              <label :for="item.name">{{ item.label }}</label>
+            <div class="item">
+              <label for="enum">e-Money Number</label>
               <input
                 class="input"
-                :type="item.type"
-                :id="item.name"
-                :placeholder="item.placeholder"
-                v-model="result[item.name]"
-                required
+                id="enum"
+                placeholder="238521993"
+                v-model="eNum"
+                v-bind="eNumProps"
               />
+            </div>
+            <div class="item">
+              <label for="pin">e-Money PIN</label>
+              <input class="input" id="pin" placeholder="6891" v-model="pin" v-bind="pinProps" />
             </div>
           </div>
           <div class="cash-bottom" v-else>
@@ -240,8 +277,21 @@ const onSubmit = handleSubmit((values) => {
   margin-top: 32px;
 }
 
+.item_error label {
+  color: #cd2c2c;
+}
+
+.input:focus {
+  outline: #d87d4a 1px solid;
+}
+
+.item_error .input {
+  outline: 2px solid #cd2c2c;
+}
+
 label {
-  display: block;
+  display: flex;
+  justify-content: space-between;
   font-size: 12px;
   letter-spacing: -0.2px;
   font-weight: bold;
@@ -261,6 +311,10 @@ label {
 
 .input::placeholder {
   opacity: 0.4;
+}
+
+.error {
+  color: #cd2c2c;
 }
 
 .payment-item {
