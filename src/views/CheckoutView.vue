@@ -12,7 +12,7 @@ const paymentMethod = ref('e-money')
 const { defineField, handleSubmit, errors } = useForm({
   validationSchema: {
     name: yup.string().required('Cannot be empty'),
-    phone: yup.number().required('Cannot be empty'),
+    phone: yup.string().required('Cannot be empty'),
     email: yup.string().required('Cannot be empty').email('Wrong format'),
     address: yup.string().required('Cannot be empty'),
     zip: yup.number().required('Cannot be empty'),

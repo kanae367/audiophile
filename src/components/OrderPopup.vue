@@ -45,7 +45,9 @@ const isOpen = ref(false)
           >
             and {{ cart.products.length - 1 }} other item(s)
           </button>
-          <button class="items-bottom" @click="isOpen = false" v-else>View less</button>
+          <button class="items-bottom" @click="isOpen = false" v-else>
+            {{ cart.products.length > 1 ? 'View less' : 'You have 1 item' }}
+          </button>
         </div>
 
         <div class="total">
