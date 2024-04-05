@@ -150,7 +150,7 @@ const onSubmit = handleSubmit((values) => {
           <div class="payment-container">
             <label>Payment Method</label>
             <div>
-              <label for="payment" class="payment-item">
+              <label for="emoney" class="payment-item">
                 <input
                   type="radio"
                   checked
@@ -158,17 +158,18 @@ const onSubmit = handleSubmit((values) => {
                   value="e-money"
                   v-model="paymentMethod"
                   name="payment"
+                  id="emoney"
                 />
                 e-Money
               </label>
-              <label for="payment" class="payment-item">
+              <label for="cash" class="payment-item">
                 <input
                   type="radio"
-                  checked
                   class="payment-radio"
                   value="cash"
                   v-model="paymentMethod"
                   name="payment"
+                  id="cash"
                 />
                 Cash on Delivery
               </label>
