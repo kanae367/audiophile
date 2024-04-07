@@ -15,11 +15,28 @@ const { defineField, handleSubmit, errors } = useForm({
     phone: yup.string().required('Cannot be empty'),
     email: yup.string().required('Cannot be empty').email('Wrong format'),
     address: yup.string().required('Cannot be empty'),
-    zip: yup.number().required('Cannot be empty'),
+    zip: yup
+      .number()
+      .required('Cannot be empty')
+      .min(10000, 'Must be valid zip code')
+      .max(99999, 'Must be valid zip code')
+      .typeError('Must be a number'),
     city: yup.string().required('Cannot be empty'),
     country: yup.string().required('Cannot be empty'),
-    pin: yup.number().required('Cannot be empty'),
-    eNum: yup.number().required('Cannot be empty')
+    pin: yup
+      .number()
+      .required('Cannot be empty')
+      .min(1000, 'Must be valid pin')
+      .max(9999, 'Must be valid pin')
+      .typeError('Must be a number')
+      .default(5555),
+    eNum: yup
+      .number()
+      .required('Cannot be empty')
+      .min(100000000, 'Must be valid e-Money number')
+      .max(999999999, 'Must be valid e-Money number')
+      .typeError('Must be a number')
+      .default(534555555)
   }
 })
 
@@ -175,9 +192,11 @@ const onSubmit = handleSubmit((values) => {
               </label>
             </div>
           </div>
-          <div class="e-container" v-if="paymentMethod === 'e-money'">
-            <div class="item">
-              <label for="enum">e-Money Number</label>
+          <div class="e-container" v-show="paymentMethod === 'e-money'">
+            <div :class="`item ${errors.eNum ? 'item_error' : ''}`">
+              <label for="enum"
+                >e-Money Number <span class="error">{{ errors.eNum }}</span></label
+              >
               <input
                 class="input"
                 id="enum"
@@ -186,12 +205,14 @@ const onSubmit = handleSubmit((values) => {
                 v-bind="eNumProps"
               />
             </div>
-            <div class="item">
-              <label for="pin">e-Money PIN</label>
+            <div :class="`item ${errors.pin ? 'item_error' : ''}`">
+              <label for="pin"
+                >e-Money PIN <span class="error">{{ errors.pin }}</span></label
+              >
               <input class="input" id="pin" placeholder="6891" v-model="pin" v-bind="pinProps" />
             </div>
           </div>
-          <div class="cash-bottom" v-else>
+          <div class="cash-bottom" v-show="paymentMethod === 'cash'">
             <CheckoutIcon class="checkout-icon" />
             The ‘Cash on Delivery’ option enables you to pay in cash when our delivery courier
             arrives at your residence. Just make sure your address is correct so that your order
@@ -529,6 +550,10 @@ label {
   }
 
   .billing-container .input {
+    max-width: 330px;
+  }
+
+  label {
     max-width: 330px;
   }
 }
