@@ -60,6 +60,10 @@ const props = defineProps<{
   gap: 24px;
 }
 
+.item__button:hover {
+  background-color: #fbaf85;
+}
+
 .item__special {
   font-size: 14px;
   letter-spacing: 10px;
@@ -88,6 +92,7 @@ const props = defineProps<{
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
+  transition: background-color 0.2s;
 }
 
 @media screen and (min-width: 768px) {

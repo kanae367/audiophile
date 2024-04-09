@@ -169,6 +169,12 @@ function handleModalClick(e: Event) {
   color: rgba(0, 0, 0, 0.25);
   background-color: transparent;
   border: none;
+  cursor: pointer;
+  transition: 0.2s color;
+}
+
+.list__item-button:hover {
+  color: #d87d4a;
 }
 
 @media screen and (min-width: 768px) {
