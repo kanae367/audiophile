@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
+import router from '@/router'
 import CheckedIcon from './icons/CheckedIcon.vue'
 import { useCart } from '@/scripts/store'
 import { ref } from 'vue'
 const cart = useCart()
 const mostExpensive = cart.products.sort((a, b): any => a.price * a.amount < b.price * b.amount)
 const isOpen = ref(false)
+const handleBackBtnClick = () => {
+  router.push('/')
+  cart.clearAll()
+}
 </script>
 <template>
   <div class="modal-outer">
@@ -57,7 +61,9 @@ const isOpen = ref(false)
           </p>
         </div>
       </div>
-      <RouterLink class="button modal_bottom" to="/">Back To Home</RouterLink>
+      <button type="button" class="button modal_bottom" @click="handleBackBtnClick">
+        Back To Home
+      </button>
     </div>
   </div>
 </template>
